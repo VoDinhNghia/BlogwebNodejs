@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>post page</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        #title {
+            color: green;
+            font-size: 25px;
+            text-align: center;
+        }
+
+        table {
+            margin: auto;
+            width: 550px;
+            text-align: center;
+        }
+
+        #title_a a {
+            color: blue;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        #email {
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <%- include("./menu") %>
+        <p id="title">Danh sách tất cả các bài đăng.</p>
+        <table>
+            <% if(data.length){ 
+                for(var i = 0;i < data.length;i++) { %>
+            <tr>
+                <td><%=i+1 %>.</td>
+                <td id='title_a'><a href="/detai_post/<%= data[i].ID%>"><%= data[i].title%>
+                    </a></td>
+                <td>author: <%= data[i].name%></td>
+            </tr>
+            <% }
+                    }else{ %>
+            <tr>
+                <td colspan="2">Không có bài đăng.</td>
+            </tr>
+            <% } %>
+        </table>
+        <br>
+        <%- include("./footer") %>
+    </div>
+
+</body>
+
+</html>

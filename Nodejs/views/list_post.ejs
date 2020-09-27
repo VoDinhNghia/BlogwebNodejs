@@ -1,0 +1,56 @@
+<div class="list_main">
+    <h3>Hello: <a href="/author" id="username"><%=username %></a></h3>
+
+    <div class="content">
+        <% if(data.length){ 
+              for(var i = 0 ;i < data.length; i++) { %>
+        <h2>Title : <%= data[i].title%>
+        </h2>
+
+        <p>Ngày đăng: <%= data[i].Ngay%> <span>author: <a
+                    href="/author_detail/<%= data[i].IDuser%>"><%= data[i].name%></a></span>
+        </p><br>
+        <p><%= data[i].contend%></p>
+        <p id="hh" style="display: none;">hhh</p>
+        <!-- show peoples like -->
+        <a href="#" id="nuber_like"><%= data[i].numlike%></a>
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Chưa thực hiện</p>
+            </div>
+        </div>
+
+        <a href="/number_like/<%= data[i].ID%>" id="Btn_like">Like</a>
+        <hr>
+        <% }
+            }else{ %>
+        <p>Không có bài đăng.</p>
+        <% } %>
+    </div>
+    <div class="list">
+        <h3 id="title">Bài đăng mới nhất</h3>
+        <% if(data1.length >=5){ 
+            for(var i = data1.length-1 ;i > data1.length-6; i--) { %>
+        <p><%= i+1%>. <a href="/detai_post/<%= data1[i].ID%>"><%= data1[i].title%></a></p>
+
+        <% }
+        }else{
+             for(var i = 0;i < data1.length; i++) { %>
+        <p><%= i+1%>. <a href="/detai_post/<%= data1[i].ID%>"><%= data1[i].title%></a></p>
+        <% } 
+        }%>
+    </div>
+    <div class="clear"></div><br>
+    <div class="pagination">
+        << <%
+    for(var i = 0;i < numPages; i++) { %> <span id="p_nextpage">
+            <a href="/page/<%= i+1%>" id="nextpage">trang <%= i+1%></a>
+            </span>
+            <% } %>
+            >>
+    </div>
+</div>
+
+<script language="javascript" src="/js/js.js"></script>

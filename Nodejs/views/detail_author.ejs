@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>detail contributer</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .container_author {
+            width: 1000px;
+            margin: auto;
+            background-color: rgb(240, 247, 248);
+        }
+
+        #ti_author {
+            text-align: center;
+            font-size: 20px;
+            color: red;
+            text-align: left;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+        }
+
+        table td {
+            text-align: center;
+        }
+
+        table th {
+            color: green;
+        }
+
+        #title {
+            color: green;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        #title_a {
+            text-align: left;
+            width: 50%;
+        }
+
+        #title_a a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .tt_canhan {
+            width: 45%;
+            margin: auto;
+        }
+
+        #update a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            #ti_author {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container_author">
+        <%- include("./menu") %>
+        <br>
+        <table class="tt_canhan">
+            <tr>
+                <td>
+                    <p id="ti_author">Author : </p>
+                    <p id="ti_author">Gmail :</p>
+                    <p id="ti_author">Mobile : </p>
+                </td>
+                <td>
+                    <p id="ti_author"><%= data_author[0].name%> </p>
+                    <p id="ti_author"><%= data_author[0].email%></p>
+                    <p id="ti_author">0<%= data_author[0].mobile%></p>
+                </td>
+            </tr>
+        </table>
+        <p id="title">Tác giả hiện có <%= detail_author.length%> bài đăng</p>
+
+        <table>
+            <% if(detail_author.length){ 
+                for(var i = 0;i < detail_author.length;i++) { %>
+            <tr>
+                <td><%=i+1 %>.</td>
+                <td id='title_a'><a href="/detai_post/<%= detail_author[i].ID%>"><%= detail_author[i].title %></a></td>
+                <td><%= detail_author[i].Ngay%></td>
+            </tr>
+            <% }
+            }else{ %>
+            <tr>
+                <td colspan="5">Không có bài đăng.</td>
+            </tr>
+            <% } %>
+        </table>
+        <br>
+        <%- include("./footer") %>
+    </div>
+
+</body>
+
+</html>
