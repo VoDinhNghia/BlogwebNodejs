@@ -51,6 +51,8 @@ app.get('/number_like/:id', sql.number_like);
 app.get('/list_author', sql.list_contributer);
 app.get('/list_allPost', sql.list_allPost);
 app.get('/page/:id', sql.page);
+app.get('/forgetPass', sql.forgetPass);
+app.post('/getPass', sql.getPass);
 //error: page not found 404/
 app.use((req, res, next) => {
     let err = new Error('Page not found.');
