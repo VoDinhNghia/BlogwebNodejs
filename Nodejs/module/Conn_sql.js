@@ -35,6 +35,37 @@ exports.login = function (req, res) {
         }
     });
 }
+exports.forgetPass = function (req, res) {
+    res.render('fogetPass');
+}
+exports.getPass = function (req, res) {
+    let body = req.body;
+    var username = req.body.Username;
+    var email = req.body.Email;
+    var mobile = req.body.Mobile;
+    req.getConnection(function (err, connect) {
+        console.log("User " + username + " Quên pass vui lòng gửi pass qua mail: " + email);
+        connect.query('INSERT INTO fogetpass(username, email, ngay, mobile) VALUES (?,?,curdate(),?)', [username, email, mobile]);
+        var query = connect.query('SELECT count(*) as numRows FROM fogetpass where email =? and Ngay=curdate()', email, function (err, rows) {
+            if (err) {
+                console.log("error");
+            } else {
+                var numRows = rows[0].numRows;
+                console.log(numRows);
+                if (numRows >= 3) {
+                    res.send({ mess: 'Bạn đã nhập quá nhiều lần trong ngày vui lòng chờ ngày mai' });
+                } else {
+                    var query = connect.query('select pass from dangki where email = ?', email, function (err, row) {
+                        //giải mã pass
+                        console.log(row[0].pass);
+                        // gửi pass qua mail
+                    });
+                    res.redirect('/');
+                }
+            }
+        });
+    });
+}
 exports.search = function (req, res) {
     let body = req.body;
     var search = req.body.search;
